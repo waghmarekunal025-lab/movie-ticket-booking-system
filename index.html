@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookMyShow: Advanced End-to-End Booking Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="bms-global-navbar">
+        <div class="nav-left-cluster">
+            <button class="nav-back-action-btn" id="app-back-router" style="visibility: hidden;">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="bms-branding-logo" id="logo-home-trigger">
+                <h2>Movie<span>Booking</span>System</h2>
+            </div>
+            <div class="location-picker-dropdown" id="city-dropdown-trigger">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="active-city-label">Select City</span>
+                <i class="fas fa-chevron-down chevron-dim"></i>
+            </div>
+        </div>
+        <div class="nav-right-cluster">
+            <div class="search-bar-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for Movies, Events, Plays, Sports and Activities">
+            </div>
+            <button class="bms-auth-btn" id="global-login-btn">Sign In</button>
+        </div>
+    </header>
+
+    <nav class="bms-sub-category-bar">
+        <div class="category-links">
+            <a href="#" class="active-tab" id="sub-nav-movies">Movies</a>
+            <a href="#">Stream<sup>BUY/RENT</sup></a>
+            <a href="#">Live Events</a>
+            <a href="#">Plays</a>
+            <a href="#">Sports</a>
+            <a href="#">Activities</a>
+        </div>
+    </nav>
+
+    <main class="bms-viewport-stage">
+
+        <div id="screen-city-modal" class="flow-stage-view active">
+            <div class="modal-center-box">
+                <h3>Popular Cities</h3>
+                <div class="city-selection-grid">
+                    <div class="city-card-unit" data-city="Mumbai">
+                        <img src="https://assets-in.bmscdn.com/m6/images/common-modules/regions/mumbai.png" alt="Mumbai">
+                        <span>Mumbai</span>
+                    </div>
+                    <div class="city-card-unit" data-city="Delhi-NCR">
+                        <img src="https://assets-in.bmscdn.com/m6/images/common-modules/regions/ncr.png" alt="Delhi">
+                        <span>Delhi-NCR</span>
+                    </div>
+                    <div class="city-card-unit" data-city="Bengaluru">
+                        <img src="https://assets-in.bmscdn.com/m6/images/common-modules/regions/bang.png" alt="Bengaluru">
+                        <span>Bengaluru</span>
+                    </div>
+                    <div class="city-card-unit" data-city="Hyderabad">
+                        <img src="https://assets-in.bmscdn.com/m6/images/common-modules/regions/hyd.png" alt="Hyderabad">
+                        <span>Hyderabad</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-movies-hub" class="flow-stage-view">
+            <div class="section-title-banner">
+                <h3>Recommended Movies</h3>
+            </div>
+            <div class="movies-catalogue-grid" id="movies-render-target">
+                </div>
+        </div>
+
+        <div id="screen-movie-detail" class="flow-stage-view">
+            <div class="movie-backdrop-hero-banner" id="detail-backdrop-target">
+                <div class="hero-glass-overlay">
+                    <div class="hero-content-wrapper">
+                        <div class="hero-poster-box">
+                            <img id="detail-poster" src="" alt="Poster">
+                        </div>
+                        <div class="hero-text-details">
+                            <h1 id="detail-title">Movie Title</h1>
+                            <div class="movie-rating-badge-row">
+                                <i class="fas fa-star rating-star"></i>
+                                <span id="detail-rating">9.1/10</span>
+                                <span class="votes-text">(142K Votes)</span>
+                            </div>
+                            <div class="movie-metadata-tags-row">
+                                <span class="tag-pill">2D, 3D, IMAX 3D</span>
+                                <span class="tag-pill" id="detail-languages">English, Hindi</span>
+                            </div>
+                            <p class="movie-duration-genre" id="detail-meta-line">2h 49m • Sci-Fi, Action • UA • 26 Oct, 2014</p>
+                            <button class="bms-primary-cta-action-btn" id="detail-book-tickets-btn">Book Tickets</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="movie-synopsis-about-container">
+                <h3>About the movie</h3>
+                <p id="detail-synopsis">Comprehensive film runtime plot overview data array loaded sequentially straight from active platform storage models.</p>
+            </div>
+        </div>
+
+        <div id="screen-showtimes" class="flow-stage-view">
+            <div class="showtimes-filter-sticky-header">
+                <h3 id="showtime-movie-heading">Interstellar</h3>
+                <div class="date-scroller-tabs-bar">
+                    <button class="date-tab-btn active"><span>TODAY</span><br>18 JUN</button>
+                    <button class="date-tab-btn"><span>FRI</span><br>19 JUN</button>
+                    <button class="date-tab-btn"><span>SAT</span><br>20 JUN</button>
+                </div>
+            </div>
+            <div class="venues-listing-stack" id="venues-render-target">
+                </div>
+        </div>
+
+        <div id="screen-seating-grid" class="flow-stage-view">
+            <div class="seating-grid-workspace-layout">
+                <ul class="legend-status-indicator-bar">
+                    <li><div class="legend-box-color avail"></div><span>Available</span></li>
+                    <li><div class="legend-box-color selected"></div><span>Selected</span></li>
+                    <li><div class="legend-box-color sold"></div><span>Sold</span></li>
+                </ul>
+
+                <div class="cinema-room-matrix-map" id="seats-matrix-render-vector">
+                    </div>
+
+                <div class="imax-silver-screen-horizon-module">
+                    <div class="screen-glow-curve"></div>
+                    <p>All eyes facing this way towards the screen</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-checkout" class="flow-stage-view">
+            <div class="checkout-master-flex-wrapper">
+                <div class="checkout-left-billing-details-panel">
+                    <div class="billing-card-module security-login-pass">
+                        <div class="module-header-row">
+                            <span class="step-num-badge">1</span>
+                            <h4>Share Contact Details For Ticket Transmission</h4>
+                        </div>
+                        <div class="login-inputs-row">
+                            <input type="email" id="checkout-email-input" value="kunal@example.com" placeholder="Enter Email Address">
+                            <input type="text" id="checkout-phone-input" value="+91 9876543210" placeholder="Enter Mobile Number">
+                        </div>
+                    </div>
+                    
+                    <div class="billing-card-module payment-methods-selector">
+                        <div class="module-header-row">
+                            <span class="step-num-badge">2</span>
+                            <h4>Select Secure Payment Method Option Gateway</h4>
+                        </div>
+                        <div class="payment-options-list">
+                            <label class="pay-method-row active">
+                                <input type="radio" name="pay-method" value="UPI" checked>
+                                <span class="pay-method-meta-text"><i class="fas fa-mobile-alt"></i> UPI Transaction (GPay, PhonePe, Paytm)</span>
+                            </label>
+                            <label class="pay-method-row">
+                                <input type="radio" name="pay-method" value="CC">
+                                <span class="pay-method-meta-text"><i class="far fa-credit-card"></i> Credit / Debit Bank Cards</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-right-invoice-summary-slip-panel">
+                    <div class="invoice-box-slip">
+                        <h4>Order Summary</h4>
+                        <div class="invoice-meta-item">
+                            <span id="invoice-movie-name" class="heavy-title">Movie Title</span>
+                        </div>
+                        <p id="invoice-venue-line" class="sub-invoice-muted-line">Cinema Name & Showtime Details</p>
+                        <hr class="dash-divider">
+                        <div class="invoice-data-row">
+                            <span id="invoice-tickets-count-label">Tickets Selected</span>
+                            <span id="invoice-seats-list-values" class="bold-text">H1, H2</span>
+                        </div>
+                        <div class="invoice-data-row">
+                            <span>Convenience Fees & Tax (18% GST)</span>
+                            <span id="invoice-tax-charges">Rs. 64.20</span>
+                        </div>
+                        <hr class="dash-divider">
+                        <div class="invoice-data-row total-payment-amount-row">
+                            <span>Amount Payable</span>
+                            <span id="invoice-final-total-cost-value">Rs. 0.00</span>
+                        </div>
+                        <button class="bms-checkout-payment-submission-cta" id="gateway-payment-trigger-btn">Make Payment Transaction</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="screen-ticket-receipt" class="flow-stage-view">
+            <div class="m-ticket-pass-card-wrapper">
+                <div class="ticket-top-success-branding-header">
+                    <i class="fas fa-check-circle success-badge-icon"></i>
+                    <h3>Booking Confirmed!</h3>
+                    <p>Your digital M-Ticket has been routed to your phone and email.</p>
+                </div>
+                <div class="ticket-main-body-details">
+                    <div class="ticket-movie-title-row">
+                        <h2 id="ticket-movie-title">Interstellar</h2>
+                        <span class="format-badge-chip">3D</span>
+                    </div>
+                    <p id="ticket-venue-name" class="ticket-muted-detail-text">Inox: Insignia Atrium Mall</p>
+                    <p id="ticket-datetime-line" class="ticket-bold-highlight-text">Today, 18 Jun | 07:45 PM</p>
+                    <hr class="ticket-split-punched-line">
+                    <div class="ticket-seating-metadata-grid-block">
+                        <div class="meta-cell">
+                            <span>SCREEN</span>
+                            <h4 id="ticket-audi-num">AUDI 3</h4>
+                        </div>
+                        <div class="meta-cell">
+                            <span>SEATS</span>
+                            <h4 id="ticket-seats-list">H1, H2</h4>
+                        </div>
+                    </div>
+                    <div class="ticket-barcode-scanner-visual-box">
+                        <i class="fas fa-barcode barcode-glyph"></i>
+                        <p class="barcode-serial-string-id">BMS-982471924-KUNAL</p>
+                    </div>
+                </div>
+            </div>
+            <button class="return-home-portal-action-btn" id="receipt-home-return-btn">Return to Movies Hub Home</button>
+        </div>
+
+    </main>
+
+    <footer class="bms-sticky-action-drawer-footer-panel" id="global-action-footer-panel">
+        <div class="drawer-content-inner-limiter">
+            <div class="drawer-left-pricing-summary-meta">
+                <p id="footer-seats-list-summary">Selected Seats List String Tracking</p>
+                <h2 id="footer-total-cost-summary">Rs. 0.00</h2>
+            </div>
+            <button class="bms-drawer-forward-step-routing-cta-btn" id="footer-forward-step-trigger-btn">
+                Proceed Options <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
